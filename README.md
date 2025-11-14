@@ -29,8 +29,21 @@ SolWell 是一个基于 Solana 的健康管理和保险 DApp 原型。可以连�
 │       ├── profile/         # 个人页面
 │       └── health_data.json # 前端使用的健康数据程序 IDL
 ├── sol-well-contracts/      # 健康数据程序及测试
-└── insurance-contract/      # 保险产品管理程序及测试
+├── insurance-contract/      # 保险产品管理程序及测试
+└── screenshots/             # 项目界面截图
 ```
+
+## 界面截图
+
+下面是健康首页、钱包菜单、个人页面和保险推荐页面。截图中的指标、评分和保险价格用于展示页面效果，不代表真实健康或保险业务数据。
+
+| 健康首页 | 钱包菜单 |
+| --- | --- |
+| ![健康首页：健康指标和同步入口](screenshots/SolWell-01.png) | ![钱包菜单：地址、余额和断开连接](screenshots/SolWell-02.png) |
+
+| 个人页面 | 保险推荐 |
+| --- | --- |
+| ![个人页面：钱包信息和服务入口](screenshots/SolWell-03.png) | ![保险推荐：健康评分、产品和保费折扣](screenshots/SolWell-04.png) |
 
 ## 本地启动前端
 

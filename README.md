@@ -1,55 +1,57 @@
 # SolWell
 
-SolWell 是一个基于 Solana 的健康管理和保险 DApp 原型。可以连接 Phantom 钱包，查看步数、睡眠、心率等健康指标，把演示数据同步到链上，再根据健康评分展示保险产品和保费折扣。
+English | [简体中文](README.zh-CN.md)
 
-项目目前主要用于验证页面交互和链上数据读写，还不是可以直接用于真实保险业务的产品。
+SolWell is a Solana-based health management and insurance DApp prototype. You can connect a Phantom wallet, view health metrics such as steps, sleep, and heart rate, sync demo data on-chain, and see insurance products and premium discounts based on a health score.
 
-## 目前做了什么
+The project is currently focused on testing the UI and on-chain data flow. It is not ready for real insurance use.
 
-- **健康首页**：展示步数、睡眠时长、心率、卡路里和活动时间，支持切换 7 天、30 天、365 天和全部时间。
-- **钱包连接**：接入 Phantom，支持连接、断开、查看余额和复制地址；移动端提供 Phantom 深层链接和二维码入口。
-- **健康数据同步**：确认后请求钱包签名，尝试将日、周、月、年及全部时间的数据写入 Solana。
-- **保险页面**：在前端计算健康评分，展示推荐保险和折扣。目前产品列表使用模拟数据，没有接入链上投保流程。
-- **个人页面**：展示钱包信息及个人服务入口。健康评分、保险资产和健康天数等统计目前是静态演示值，部分菜单仅做了界面。
-- **保险产品合约**：支持初始化管理员账户、创建保险产品，以及由产品创建者更新产品信息和启用状态。
+## What's implemented
 
-## 技术栈
+- **Health dashboard**: Displays steps, sleep duration, heart rate, calories, and activity time, with filters for 7 days, 30 days, 365 days, and all time.
+- **Wallet connection**: Integrates Phantom for connecting, disconnecting, viewing balances, and copying addresses. Deep links and a QR code entry point are available for opening the app in Phantom on mobile.
+- **Health data sync**: After confirmation, requests a wallet signature and attempts to write daily, weekly, monthly, yearly, and all-time data to Solana.
+- **Insurance page**: Calculates a health score on the frontend and displays recommended products and discounts. The product list uses mock data and is not connected to an on-chain purchase flow.
+- **Profile page**: Shows wallet information and personal service entries. Statistics such as health score, insurance assets, and healthy days are static demo values, and some menu items are UI-only.
+- **Insurance product program**: Supports initializing an administrator account, creating insurance products, and letting product creators update product details and active status.
 
-前端使用 Next.js 14、React 18 和 Tailwind CSS 3，钱包与链上交互使用 `@solana/web3.js` 和 `@coral-xyz/anchor`。两个 Solana 程序均使用 Rust 和 Anchor 编写，测试使用 TypeScript。
+## Tech stack
 
-## 目录结构
+The frontend uses Next.js 14, React 18, and Tailwind CSS 3. Wallet and blockchain interactions use `@solana/web3.js` and `@coral-xyz/anchor`. Both Solana programs are written in Rust with Anchor, with tests in TypeScript.
+
+## Project structure
 
 ```text
 .
-├── SolWell- frontend/       # Next.js 前端（目录名中有空格）
+├── SolWell- frontend/       # Next.js frontend (the directory name contains a space)
 │   └── app/
-│       ├── components/      # 钱包弹窗、同步确认、底部导航等组件
-│       ├── contexts/        # 钱包状态和健康数据读写
-│       ├── insurance/       # 保险推荐页面
-│       ├── profile/         # 个人页面
-│       └── health_data.json # 前端使用的健康数据程序 IDL
-├── sol-well-contracts/      # 健康数据程序及测试
-├── insurance-contract/      # 保险产品管理程序及测试
-└── screenshots/             # 项目界面截图
+│       ├── components/      # Wallet dialogs, sync confirmation, bottom navigation, etc.
+│       ├── contexts/        # Wallet state and health data reads/writes
+│       ├── insurance/       # Insurance recommendations page
+│       ├── profile/         # Profile page
+│       └── health_data.json # Health data program IDL used by the frontend
+├── sol-well-contracts/      # Health data program and tests
+├── insurance-contract/      # Insurance product management program and tests
+└── screenshots/             # App screenshots
 ```
 
-## 界面截图
+## Screenshots
 
-下面是健康首页、钱包菜单、个人页面和保险推荐页面。截图中的指标、评分和保险价格用于展示页面效果，不代表真实健康或保险业务数据。
+These screenshots show the health dashboard, wallet menu, profile, and insurance recommendations. The metrics, scores, and insurance prices illustrate the interface; they are not real health records or insurance business data.
 
-| 健康首页 | 钱包菜单 |
+| Health dashboard | Wallet menu |
 | --- | --- |
-| ![健康首页：健康指标和同步入口](screenshots/SolWell-01.png) | ![钱包菜单：地址、余额和断开连接](screenshots/SolWell-02.png) |
+| ![Health dashboard: health metrics and sync button](screenshots/SolWell-01.png) | ![Wallet menu: address, balance, and disconnect option](screenshots/SolWell-02.png) |
 
-| 个人页面 | 保险推荐 |
+| Profile | Insurance recommendations |
 | --- | --- |
-| ![个人页面：钱包信息和服务入口](screenshots/SolWell-03.png) | ![保险推荐：健康评分、产品和保费折扣](screenshots/SolWell-04.png) |
+| ![Profile: wallet information and service entries](screenshots/SolWell-03.png) | ![Insurance recommendations: health score, products, and premium discounts](screenshots/SolWell-04.png) |
 
-## 本地启动前端
+## Run the frontend locally
 
-准备 Node.js 18.17 或更高版本，以及 npm。需要体验钱包交互时，再安装 Phantom，并切换到 **Devnet**。
+Install Node.js 18.17 or later and npm. To try wallet interactions, also install Phantom and switch it to **Devnet**.
 
-在项目根目录执行：
+From the project root:
 
 ```bash
 cd "SolWell- frontend"
@@ -57,64 +59,64 @@ npm install
 npm run dev
 ```
 
-打开 <http://localhost:3000>。前端默认连接 Solana Devnet，网络地址写在 `app/contexts/WalletContext.js` 中，当前不需要额外配置环境变量。
+Open <http://localhost:3000>. The frontend connects to Solana Devnet by default. The network is configured in `app/contexts/WalletContext.js`; no additional environment variables are currently required.
 
-其他命令：
+Other commands:
 
 ```bash
-npm run build  # 构建前端
-npm run start  # 运行构建后的应用
+npm run build  # Build the frontend
+npm run start  # Run the production build
 ```
 
-未连接钱包也能查看演示界面。连接钱包并尝试同步时，需要准备少量 Devnet SOL 支付交易费和账户租金。
+You can browse the demo without connecting a wallet. To connect and try syncing data, you will need a small amount of Devnet SOL for transaction fees and account rent.
 
-## 合约开发
+## Contract development
 
-需要先安装 Rust、Solana CLI、Anchor CLI 和 Yarn，并准备本地 Solana 钱包。两个合约是独立的 Anchor 工作区，需要分别安装依赖和构建。
+Install Rust, the Solana CLI, the Anchor CLI, and Yarn, and set up a local Solana wallet first. The two programs are separate Anchor workspaces, so install dependencies and build each one separately.
 
 ```bash
-# 健康数据程序
+# Health data program
 cd sol-well-contracts
 yarn install
 anchor build
 anchor test
 
-# 保险产品程序
+# Insurance product program
 cd ../insurance-contract
 yarn install
 anchor build
 anchor test
 ```
 
-两个工作区的 `Anchor.toml` 默认使用 `localnet`，钱包路径是 `~/.config/solana/id.json`；前端则使用 Devnet，启动本地合约不会自动切换前端网络。
+Both workspaces default to `localnet` in `Anchor.toml`, with the wallet at `~/.config/solana/id.json`. The frontend uses Devnet, so running the programs locally does not automatically switch the frontend network.
 
-当前源码声明的程序地址：
+Program addresses declared in the current source:
 
-| 程序 | 地址 |
+| Program | Address |
 | --- | --- |
-| 健康数据 | `ESrVTzUZSTro7K5j3eibWLX4mzxPHN2JHnNW4gCSidUr` |
-| 保险产品 | `J6pC1jbqJFSAfai5ociJQzCUg6uspv62FcnRNV7R1stE` |
+| Health data | `ESrVTzUZSTro7K5j3eibWLX4mzxPHN2JHnNW4gCSidUr` |
+| Insurance products | `J6pC1jbqJFSAfai5ociJQzCUg6uspv62FcnRNV7R1stE` |
 
-自行部署时，需要核对部署密钥对应的程序地址，保持 `declare_id!`、`Anchor.toml`、生成的 IDL 和前端配置一致。健康数据测试使用 `HealthData` 工作区名称，保险源码中的模块名是 `insurance`，与目录名并不完全相同；运行前也要检查生成的 IDL、类型文件和测试引用是否匹配。以上是开发命令，不代表当前版本已经通过构建和测试。
+When deploying your own programs, check the program addresses against the deployment keypairs and keep `declare_id!`, `Anchor.toml`, the generated IDLs, and the frontend configuration in sync. The health data tests use the `HealthData` workspace name, while the insurance source uses the module name `insurance`; these do not exactly match the directory names. Before running the tests, also check that the generated IDLs, type files, and test references match. The commands above describe the development workflow, not a claim that the current version has passed builds and tests.
 
-### 健康数据存储
+### Health data storage
 
-健康数据账户使用以下种子派生 PDA：
+Health data accounts use PDAs derived from these seeds:
 
 ```text
-["health_info", 用户公钥, 时间范围]
+["health_info", user public key, time range]
 ```
 
-时间范围包括 `Day`、`Week`、`Month`、`Year` 和 `All`。账户保存所属用户、时间范围、步数、睡眠时长、心率、卡路里和活动分钟数，同一用户同一范围的数据会被更新，不是逐日追加的历史记录。
+The supported time ranges are `Day`, `Week`, `Month`, `Year`, and `All`. Each account stores its user, time range, steps, sleep duration, heart rate, calories, and active minutes. Data for the same user and time range is updated in place rather than appended as a daily history.
 
-### 保险产品管理
+### Insurance product management
 
-保险合约保存产品编号、名称、描述、保额、保费、保障天数和启用状态。当前只有产品管理指令，没有投保付款、出单、理赔或自动扣费功能，前端保险页面也尚未接入这个合约。
+The insurance program stores a product ID, name, description, coverage amount, premium, coverage duration in days, and active status. It currently only provides product management instructions. There is no premium payment, policy issuance, claims processing, or automatic billing, and the frontend insurance page is not yet connected to this program.
 
-## 使用前需要知道
+## Things to know before using it
 
-- 尚未接入手环、手机健康平台或其他真实健康数据源。同步时会生成各时间范围的演示数据，不应把它当成真实采集记录。
-- 读取链上健康数据失败时会返回模拟数据；余额读取失败时也可能显示模拟余额。
-- 同步交易失败时，代码会返回带有 `simulated: true` 的模拟成功结果，交易编号以 `simulated_` 开头。页面显示成功不等于交易真的上链，实际结果要到 Devnet 浏览器核对。
-- 健康评分、排名和折扣仅用于演示，不是医学判断，也不是保险公司的正式报价。
-- 健康指标直接保存在链上账户中，目前没有加密或访问控制方案。请使用测试钱包和虚构数据，不要上传真实个人健康信息，也不要使用主网资金。
+- No wearables, mobile health platforms, or other real health data sources are connected. Syncing generates demo data for each time range; it should not be treated as collected health records.
+- Failed on-chain health data reads fall back to mock data. Failed balance reads may also display a mock balance.
+- If a sync transaction fails, the code returns a simulated success result with `simulated: true` and a transaction ID starting with `simulated_`. A success message in the UI does not mean a transaction was recorded on-chain. Check the actual result in a Devnet explorer.
+- Health scores, rankings, and discounts are for demonstration only. They are neither medical assessments nor official insurance quotes.
+- Health metrics are stored directly in on-chain accounts, without an encryption or access-control scheme. Use a test wallet and fictional data. Do not upload real personal health information or use mainnet funds.
